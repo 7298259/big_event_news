@@ -73,3 +73,13 @@ $(function () {
 
    })
 })
+
+// 说明一下；video里面的请求地址不用了，用新的 http://big-event-vue-api-t.itheima.net
+// 原来的：Content-Type: 'application/x-www-form-urlencoded' -> key1=value1&key2=value2
+// 现在的：Content-Type需要指定：'application/json' -> '{ "key1": "value1", "key2": "value2" }'
+
+// username=qd51&password=qd51qd51&repassword=qd51qd51
+// '{ "username": "qd51", "password": "qd51qd51", "repassword": "qd51qd51" }'
+
+// let str1 = 'username=qd51&password=qd51qd51&repassword=qd51qd51'
+// console.log(format2Json(str1))
