@@ -50,13 +50,13 @@ $(function () {
 
     // 调用接口，把头像上传到服务器
     $.ajax({
-      method: 'PATCH',
+      method: 'POST',
       url: '/my/update/avatar',
       data: {
         avatar: dataURL
       },
       success(res) {
-        if (res.code !== 0) return layer.msg('上传头像失败！')
+        if (res.status !== 0) return layer.msg('上传头像失败！')
 
         layer.msg('上传头像成功')
         window.parent.getUserInfo()

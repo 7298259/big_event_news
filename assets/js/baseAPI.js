@@ -10,7 +10,8 @@ $.ajaxPrefilter(function (config) {
     return JSON.stringify(target)
   }
   // 统计设置基准地址
-  config.url = 'http://big-event-vue-api-t.itheima.net' + config.url
+  // config.url = 'http://big-event-vue-api-t.itheima.net' + config.url
+  config.url = 'http://127.0.0.1:9090' + config.url
 
   // 同意设置请求头 Content-Type
   config.contentType = 'application/json'

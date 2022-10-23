@@ -15,7 +15,7 @@ $(function () {
       method: 'GET',
       url: '/my/userinfo',
       success(res) {
-        if (res.code !== 0) return layer.msg('请求用户信息失败！')
+        if (res.status !== 0) return layer.msg('请求用户信息失败！')
         // 给表单进行回显数据
         // form.val('你要指定给哪个表单', '你要指定的那个值')
         form.val('userForm', res.data)
@@ -42,11 +42,11 @@ $(function () {
     // form.val('userForm') -> { key: value, key: value }
     // console.log(form.val('userForm'))
     $.ajax({
-      method: 'PUT',
+      method: 'POST',
       url: '/my/userinfo',
       data: form.val('userForm'), // 问题：@ -> %40 这里进行了转义操作 （空格 -> 20%）
       success(res) {
-        if (res.code !== 0) {
+        if (res.status !== 0) {
           return layer.msg('更新用户信息失败！')
         }
         layer.msg('更新用户信息成功！')

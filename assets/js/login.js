@@ -36,7 +36,7 @@ $(function () {
     // 经过分析：1、 修改 Content-Type 2、需要将参数转成 json 格式
     $.ajax({
       method: 'POST',
-      url: '/api/reg',
+      url: '/api/reguser',
       // data: JSON.stringify({
       // 可将对象转成json格式的字符串
       // username:$('#formReg [name=username]').val(),
@@ -45,7 +45,7 @@ $(function () {
       // }),
       data: $(this).serialize(),
       success(res) {
-        if (res.code !== 0) {
+        if (res.status !== 0) {
           return layer.msg(res.message)
         }
         layer.msg('注册成功')
@@ -64,7 +64,7 @@ $(function () {
       url: '/api/login',
       data: $(this).serialize(),
       success(res) {
-        if (res.code !== 0) return layer.msg(res.message)
+        if (res.status !== 0) return layer.msg(res.message)
 
         localStorage.setItem('big_news_token', res.token)
         location.href = '/home.html'        

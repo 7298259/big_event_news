@@ -9,9 +9,9 @@ $(function () {
   function loadCateList() {
     $.ajax({
       method: 'GET',
-      url: '/my/cate/list',
+      url: '/my/article/cates',
       success(res) {
-        if (res.code !== 0) return layer.msg('获取文章分类列表失败')
+        if (res.status !== 0) return layer.msg('获取文章分类列表失败')
         const html = template('tpl-cate', res)
         $('tbody').empty().append(html)
       }
@@ -39,11 +39,11 @@ $(function () {
 
     if (isEdit) {
       $.ajax({
-        method: 'PUT',
-        url: '/my/cate/info',
+        method: 'POST',
+        url: '/my/article/updatecate',
         data: $(this).serialize(),
         success(res) {
-          if (res.code !== 0) return layer.msg('编辑分类失败')
+          if (res.status !== 0) return layer.msg('编辑分类失败')
           layer.msg('编辑分类成功')
           // 刷新列表        
           loadCateList()
@@ -57,7 +57,7 @@ $(function () {
         // data: $(this).serialize()
         data: form.val('addFormFilter'),
         success(res) {
-          if (res.code !== 0) return layer.msg('添加分类失败')
+          if (res.status !== 0) return layer.msg('添加分类失败')
           layer.msg('添加分类成功')
           // 刷新列表        
           loadCateList()
@@ -89,9 +89,10 @@ $(function () {
     // 需要回显表单
     $.ajax({
       method: 'GET',
-      url: `/my/cate/info?id=${id}`,
+      // url: `/my/cate/info?id=${id}`,
+      url: `/my/article/cates/${id}`,
       success(res) {
-        if (res.code !== 0) return layer.msg('获取分类详情失败')
+        if (res.status !== 0) return layer.msg('获取分类详情失败')
         // 快速为表单进行赋值
         form.val('addFormFilter', res.data)
       }
@@ -104,10 +105,11 @@ $(function () {
     const id = $(this).attr('data-id')
     if (result) {
       $.ajax({
-        method: 'DELETE',
-        url: `/my/cate/del?id=${id}`,
+        method: 'GET',
+        // url: `/my/cate/del?id=${id}`,
+        url: `/my/article/deletecate/${id}`,
         success(res) {
-          if (res.code !== 0) return layer.msg('删除分类详情失败')
+          if (res.status !== 0) return layer.msg('删除分类详情失败')
           layer.msg('删除分类详情成功')
           loadCateList()
          }

@@ -13,7 +13,7 @@ function getUserInfo() {
     // },
     success(res) {
       // console.log(res)
-      if (res.code !== 0) return layer.msg(res.message)
+      if (res.status !== 0) return layer.msg(res.message)
       // 按需渲染头像
       renderAvatar(res.data)
     }

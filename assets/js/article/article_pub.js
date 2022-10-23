@@ -9,12 +9,13 @@ $(function () {
   function loadCateList() {
     $.ajax({
       method: 'GET',
-      url: 'http://big-event-vue-api-t.itheima.net/my/cate/list',
+      // url: 'http://big-event-vue-api-t.itheima.net/my/cate/list',
+      url: 'http://127.0.0.1:9090/my/article/cates',
       headers: {
         Authorization: localStorage.getItem('big_news_token')
       },
       success(res) {
-        if (res.code !== 0) return layer.msg('获取文章分类列表失败')
+        if (res.status !== 0) return layer.msg('获取文章分类列表失败')
         const html = template('tpl-cate', res)
         $('[name=cate_id]').html(html)
         // layui本身的特性，需要多走一步
@@ -84,7 +85,8 @@ $(function () {
         
         $.ajax({
           method: 'POST',
-          url: 'http://big-event-vue-api-t.itheima.net/my/article/add',
+          // url: 'http://big-event-vue-api-t.itheima.net/my/article/add',
+          url: 'http://127.0.0.1:9090/my/article/add',
           data: fd,
           headers: {
             Authorization: localStorage.getItem('big_news_token')
@@ -93,7 +95,7 @@ $(function () {
           processData: false,
           contentType: false,
           success(res) {
-            if (res.code !== 0) return layer.msg('发布文章失败了')
+            if (res.status !== 0) return layer.msg('发布文章失败了')
             layer.msg('发布文章成功了')
             location.href = '/article/article_list.html'
            }
